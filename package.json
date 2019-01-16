@@ -1,0 +1,41 @@
+{
+  "name": "side-drawer",
+  "version": "1.0.0",
+  "description": "A simple side drawer element with no dependencies and small as possible",
+  "keywords": [
+    "web component",
+    "hamburger",
+    "menu",
+    "drawer",
+    "side-drawer",
+    "app drawer",
+    "animating",
+    "web-component"
+  ],
+  "main": "dist/side-drawer.js",
+  "umd:main": "dist/side-drawer.umd.js",
+  "module": "dist/side-drawer.mjs",
+  "source": "lib/side-drawer.ts",
+  "types": "dist/side-drawer.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "scripts": {
+    "build": "microbundle",
+    "start": "microbundle watch",
+    "clean": "rm -rf dist",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "microbundle": "^0.9.0",
+    "typescript": "^3.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wes566/side-drawer"
+  },
+  "author": "Wes Peter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wes566/side-drawer"
+  },
+  "homepage": "https://github.com/wes566/side-drawer"
+}
