@@ -19,13 +19,19 @@
   "types": "dist/side-drawer.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "scripts": {
-    "build": "microbundle",
-    "start": "microbundle watch",
+    "build": "rollup -c",
+    "start": "rollup -c --watch",
     "clean": "rm -rf dist",
     "prepublish": "npm run build"
   },
   "devDependencies": {
-    "microbundle": "^0.9.0",
+    "autoprefixer": "^9.4.5",
+    "rollup": "^1.1.0",
+    "rollup-plugin-postcss": "^1.6.3",
+    "rollup-plugin-string": "^2.0.2",
+    "rollup-plugin-terser": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.19.0",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.2"
   },
   "repository": {

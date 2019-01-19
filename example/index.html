@@ -9,7 +9,7 @@
     <title>
       side-drawer - A simple, animating menu button built as a Web Component
     </title>
-    <script src="/build/wc-menu-button.js"></script>
+    <script src="../dist/side-drawer.js"></script>
 
     <style>
       :root {
@@ -21,6 +21,10 @@
         --secondary-accent-color: #7c64d8;
         --code-bg-color: #64189f22;
         --code-fg-color: #2c2c2c;
+      }
+
+      side-drawer {
+        background-color: blue;
       }
 
       html body {
@@ -128,6 +132,8 @@
         <div class="hero-demo"><p>demo goes here</p></div>
       </section>
     </main>
+
+    <side-drawer> <div>This is the menu</div> </side-drawer>
 
     <script>
       const myMenuIcon = document.querySelector("#myButton");

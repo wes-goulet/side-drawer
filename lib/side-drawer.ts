@@ -1,26 +1,20 @@
-export default class SideDrawer extends HTMLElement {
+// @ts-ignore
+import style from "./style.css";
+// @ts-ignore
+import template from "./template.html";
+
+// using a template so it only needs to be parsed once, whereas setting
+// innerHTML directly in the custom element ctor means the HTML would get parsed
+// for every custom element on the page
+const tmpl = document.createElement("template");
+tmpl.innerHTML = `<style>${style}</style>${template}`;
+
+export class SideDrawer extends HTMLElement {
   constructor() {
     super();
 
-    this.attachShadow({ mode: "open" });
-    // @ts-ignore
-    this.shadowRoot.innerHTML = html`
-      <style>
-        .container {
-          height: 100%;
-          width: 0;
-          position: fixed;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          overflow-x: hidden;
-          transition: 0.5s;
-        }
-      </style>
-
-      <div class="container"><slot></slot></div>
-      >
-    `;
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.appendChild(tmpl.content.cloneNode(true));
   }
 }
 
