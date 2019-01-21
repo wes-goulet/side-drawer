@@ -1,12 +1,53 @@
 :host {
-  height: 100vh;
   background-color: #ffffff;
-  width: 250px; /* TODO: set this back to 0 */
-  max-width: 500px;
+  width: 350px;
+  max-width: 75vw;
+}
+
+#d {
   position: fixed;
-  z-index: 1;
+  z-index: 99;
+  background-color: inherit;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+
   top: 0;
+  bottom: 0;
   left: 0;
-  overflow-x: hidden;
-  transition: 0.5s;
+  height: 100vh;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: inherit;
+  max-width: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+:host([open]) #d {
+  transform: none;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
+}
+
+#fs {
+  position: fixed;
+  z-index: 98;
+  background-color: #000000;
+
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  transition: var(
+    --side-drawer-overlay-transition,
+    opacity 0.25s ease-in-out 0.25s
+  );
+  width: 100vw;
+  opacity: 0;
+  visibility: hidden;
+}
+
+:host([open]) #fs {
+  opacity: var(--side-drawer-overlay-opacity, 0.7);
+  visibility: visible;
 }

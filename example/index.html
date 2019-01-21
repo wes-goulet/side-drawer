@@ -21,10 +21,13 @@
         --secondary-accent-color: #7c64d8;
         --code-bg-color: #64189f22;
         --code-fg-color: #2c2c2c;
+        /* --side-drawer-overlay-opacity: 0; */
       }
 
       side-drawer {
-        background-color: blue;
+        background-color: var(--secondary-accent-color);
+        /* border-top-right-radius: 10%;
+        border-bottom-right-radius: 10%; */
       }
 
       html body {
@@ -129,21 +132,18 @@
       <section class="hero">
         <h1>side-menu</h1>
         <h2>A simple, animating menu web component</h2>
-        <div class="hero-demo"><p>demo goes here</p></div>
+        <div class="hero-demo">
+          <button onclick="handleClick()">Open Menu</button>
+        </div>
       </section>
     </main>
 
-    <side-drawer> <div>This is the menu</div> </side-drawer>
+    <side-drawer id="drawer"><div>This is the menu</div></side-drawer>
 
     <script>
-      const myMenuIcon = document.querySelector("#myButton");
-      if (!!myMenuIcon) {
-        myMenuIcon.addEventListener("opened", ev => {
-          console.log("menu was opened");
-        });
-        myMenuIcon.addEventListener("closed", ev => {
-          console.log("menu was closed");
-        });
+      function handleClick() {
+        const drawer = document.getElementById("drawer");
+        drawer.open = !drawer.open;
       }
     </script>
   </body>
