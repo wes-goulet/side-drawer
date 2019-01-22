@@ -9,8 +9,15 @@ import template from "./template.html";
 const tmpl = document.createElement("template");
 tmpl.innerHTML = `<style>${style}</style>${template}`;
 
+enum KEYCODE {
+  ESC = 27
+}
+
 export class SideDrawer extends HTMLElement {
   private _freeSpaceDiv: HTMLElement | null;
+
+  // Explicitly let TS know any type can come from index signature
+  [key: string]: any;
 
   constructor() {
     super();
@@ -27,7 +34,37 @@ export class SideDrawer extends HTMLElement {
         this.handleFreeSpaceDivClick
       );
     }
+
+    this.upgradeProperty("open");
+
+    this.addEventListener("keyup", this.handleKeyUp);
   }
+
+  disconnectedCallback() {
+    this.removeEventListener("keyup", this.handleKeyUp);
+  }
+
+  // from https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
+  upgradeProperty = (prop: string) => {
+    if (this.hasOwnProperty(prop)) {
+      let value = this[prop];
+      delete this[prop];
+      this[prop] = value;
+    }
+  };
+
+  handleKeyUp = (e: KeyboardEvent) => {
+    if (e.altKey) {
+      return;
+    }
+
+    switch (e.keyCode) {
+      case KEYCODE.ESC:
+        e.preventDefault();
+        this.open = false;
+        break;
+    }
+  };
 
   get open() {
     return this.hasAttribute("open");
@@ -41,20 +78,33 @@ export class SideDrawer extends HTMLElement {
     }
   }
 
-  // static get observedAttributes() {
-  //   return ["open"];
-  // }
+  static get observedAttributes() {
+    return ["open"];
+  }
 
-  // attributeChangedCallback(_name: string, _oldValue: any, _newValue: any) {
-  //   // When the drawer is closed, update keyboard/screen reader behavior.
-  //   if (!this.open) {
-  //     this.setAttribute("tabindex", "-1");
-  //     this.setAttribute("aria-disabled", "true");
-  //   } else {
-  //     this.setAttribute("tabindex", "0");
-  //     this.setAttribute("aria-disabled", "false");
-  //   }
-  // }
+  attributeChangedCallback(_name: string, _oldValue: any, _newValue: any) {
+    if (_name === "open") {
+      // When the drawer is closed, update keyboard/screen reader behavior.
+      if (!this.open) {
+        this.setAttribute("tabindex", "-1");
+        this.setAttribute("aria-disabled", "true");
+        this.dispatchEvent(
+          new CustomEvent("close", {
+            bubbles: true
+          })
+        );
+      } else {
+        this.setAttribute("tabindex", "0");
+        this.setAttribute("aria-disabled", "false");
+        this.focus();
+        this.dispatchEvent(
+          new CustomEvent("open", {
+            bubbles: true
+          })
+        );
+      }
+    }
+  }
 
   private handleFreeSpaceDivClick = (_e: any) => {
     this.open = false;
