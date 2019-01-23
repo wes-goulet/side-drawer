@@ -4,8 +4,6 @@
 
 A simple, animating side drawer built as a Web Component
 
-![side-drawer demo](/demo.gif)
-
 ## [Demo](https://side-drawer.netlify.com/)
 
 ## Installation
