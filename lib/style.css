@@ -2,6 +2,13 @@
   background-color: #ffffff;
   width: 350px;
   max-width: 75vw;
+
+  visibility: hidden;
+  transition: visibility 0.5s;
+}
+
+:host([open]) {
+  visibility: visible;
 }
 
 #d {
