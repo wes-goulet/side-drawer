@@ -11,6 +11,10 @@
   visibility: visible;
 }
 
+::slotted(div) {
+  box-sizing: border-box;
+}
+
 #d {
   position: fixed;
   z-index: 99;

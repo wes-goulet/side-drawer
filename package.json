@@ -1,6 +1,6 @@
 {
   "name": "side-drawer",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A simple side drawer element with no dependencies and small as possible",
   "keywords": [
     "web component",
@@ -10,7 +10,8 @@
     "side-drawer",
     "app drawer",
     "animating",
-    "web-component"
+    "web-component",
+    "custom-element"
   ],
   "main": "dist/side-drawer.js",
   "umd:main": "dist/side-drawer.umd.js",
@@ -19,13 +20,20 @@
   "types": "dist/side-drawer.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c --watch",
+    "build": "rollup -c && cp ./dist/side-drawer.js ./example/",
+    "rollup-watch": "rollup -c --watch",
+    "serve": "live-server ./example",
+    "copy-watch": "onchange -v \"dist/side-drawer.js\" -- cp ./dist/side-drawer.js ./example/",
+    "start": "npm-run-all --parallel rollup-watch serve copy-watch",
     "clean": "rm -rf dist",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "gzip-check": "npx gzip-size-cli dist/side-drawer.min.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.5",
+    "live-server": "^1.2.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^5.2.0",
     "rollup": "^1.1.0",
     "rollup-plugin-postcss": "^1.6.3",
     "rollup-plugin-string": "^2.0.2",

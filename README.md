@@ -4,6 +4,8 @@
 
 A simple, animating side drawer built as a Web Component
 
+![side-drawer demo](demo.gif)
+
 ## [Demo](https://side-drawer.netlify.com/)
 
 ## Installation
@@ -84,4 +86,4 @@ npm install
 npm start
 ```
 
-Then just serve up index.html, I prefer to use [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+This will start a live-server on port localhost:8080. Any changes you make to files in lib/ or any changes to example/index.html should get live reloaded.

@@ -70,7 +70,7 @@ const iifeMin = {
   ],
   input: "lib/side-drawer.ts",
   output: {
-    file: "dist/side-drawer-min.js",
+    file: "dist/side-drawer.min.js",
     format: "iife",
     name: "SideDrawer"
   }

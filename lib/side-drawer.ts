@@ -80,13 +80,23 @@ export class SideDrawer extends HTMLElement {
     return ["open"];
   }
 
+  // private _bodyOverflow: string | null | undefined;
+  // private _bodyPosition: string | null | undefined;
   attributeChangedCallback(_name: string, _oldValue: any, _newValue: any) {
     if (_name === "open") {
       // When the drawer is closed, update keyboard/screen reader behavior.
       if (!this.open) {
         this.setAttribute("tabindex", "-1");
         this.setAttribute("aria-disabled", "true");
+
         document.removeEventListener("keyup", this.handleKeyUp);
+        // if (this._bodyOverflow !== undefined) {
+        //   document.body.style.overflow = this._bodyOverflow;
+        // }
+        // if (this._bodyPosition !== undefined) {
+        //   document.body.style.position = this._bodyPosition;
+        // }
+
         this.dispatchEvent(
           new CustomEvent("close", {
             bubbles: true
@@ -95,10 +105,20 @@ export class SideDrawer extends HTMLElement {
       } else {
         this.setAttribute("tabindex", "0");
         this.setAttribute("aria-disabled", "false");
+
         this.focus({
           preventScroll: true
         });
+
         document.addEventListener("keyup", this.handleKeyUp);
+        // to prevent body behind drawer from scrolling you need
+        // to set overflow to hidden and position to fixed (for iOS)
+        // TODO: this is too buggy
+        // this._bodyOverflow = document.body.style.overflow;
+        // document.body.style.overflow = "hidden";
+        // this._bodyPosition = document.body.style.position;
+        // document.body.style.position = "fixed";
+
         this.dispatchEvent(
           new CustomEvent("open", {
             bubbles: true
