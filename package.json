@@ -18,7 +18,6 @@
   "module": "dist/side-drawer.mjs",
   "source": "lib/side-drawer.ts",
   "types": "dist/side-drawer.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
   "scripts": {
     "build": "rollup -c && cp ./dist/side-drawer.js ./example/",
     "rollup-watch": "rollup -c --watch",
