@@ -13,20 +13,20 @@
     "web-component",
     "custom-element"
   ],
-  "main": "dist/side-drawer.js",
-  "umd:main": "dist/side-drawer.umd.js",
-  "module": "dist/side-drawer.mjs",
+  "module": "dist/esm/side-drawer.js",
+  "main": "dist/esm/side-drawer.js",
   "source": "lib/side-drawer.ts",
-  "types": "dist/side-drawer.d.ts",
+  "types": "dist/esm/side-drawer.d.ts",
   "scripts": {
-    "build": "rollup -c && cp ./dist/side-drawer.js ./example/",
+    "build": "rollup -c && cp ./dist/esm/side-drawer.js ./example/side-drawer.esm.js && cp ./dist/iife/side-drawer.js ./example/side-drawer.iife.js",
     "rollup-watch": "rollup -c --watch",
     "serve": "live-server ./example",
-    "copy-watch": "onchange -v \"dist/side-drawer.js\" -- cp ./dist/side-drawer.js ./example/",
-    "start": "npm-run-all --parallel rollup-watch serve copy-watch",
+    "copy-watch-esm": "onchange -v \"dist/esm/side-drawer.js\" -- cp ./dist/esm/side-drawer.js ./example/side-drawer.esm.js",
+    "copy-watch-iife": "onchange -v \"dist/iife/side-drawer.js\" -- cp ./dist/iife/side-drawer.js ./example/side-drawer.iife.js",
+    "start": "npm-run-all --parallel rollup-watch serve copy-watch-esm copy-watch-iife",
     "clean": "rm -rf dist",
     "prepublish": "npm run build",
-    "gzip-check": "npx gzip-size-cli dist/side-drawer.min.js"
+    "gzip-check": "npx gzip-size-cli dist/esm/side-drawer.min.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.4.5",
@@ -34,11 +34,10 @@
     "npm-run-all": "^4.1.5",
     "onchange": "^5.2.0",
     "rollup": "^1.1.0",
-    "rollup-plugin-postcss": "^1.6.3",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-string": "^2.0.2",
     "rollup-plugin-terser": "^4.0.2",
     "rollup-plugin-typescript2": "^0.19.0",
-    "tslint": "^5.12.1",
     "typescript": "^3.2.2"
   },
   "repository": {

@@ -21,7 +21,33 @@ const esm = {
   ],
   input: "lib/side-drawer.ts",
   output: {
-    file: "dist/side-drawer.mjs",
+    file: "dist/esm/side-drawer.js",
+    format: "esm"
+  }
+};
+
+const esmMin = {
+  plugins: [
+    typescript({
+      useTsconfigDeclarationDir: false
+    }),
+    postcss({
+      plugins: [autoprefixer()],
+      sourceMap: false,
+      extensions: [".css"],
+      inject: false,
+      minimize: true
+    }),
+    string({
+      include: "**/template.html"
+    }),
+    terser({
+      compress: { ecma: 6 }
+    })
+  ],
+  input: "lib/side-drawer.ts",
+  output: {
+    file: "dist/esm/side-drawer.min.js",
     format: "esm"
   }
 };
@@ -43,9 +69,9 @@ const iife = {
   ],
   input: "lib/side-drawer.ts",
   output: {
-    file: "dist/side-drawer.js",
+    file: "dist/iife/side-drawer.js",
     format: "iife",
-    name: "SideDrawer"
+    name: "InfiniteCarouselWc"
   }
 };
 
@@ -70,10 +96,10 @@ const iifeMin = {
   ],
   input: "lib/side-drawer.ts",
   output: {
-    file: "dist/side-drawer.min.js",
+    file: "dist/iife/side-drawer.min.js",
     format: "iife",
-    name: "SideDrawer"
+    name: "InfiniteCarouselWc"
   }
 };
 
-export default [esm, iife, iifeMin];
+export default [esm, esmMin, iife, iifeMin];
