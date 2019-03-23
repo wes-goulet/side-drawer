@@ -1,4 +1,6 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
+
+[![CircleCI](https://circleci.com/gh/wes566/side-drawer.svg?style=svg)](https://circleci.com/gh/wes566/side-drawer)
 
 # side-drawer
 
@@ -10,25 +12,40 @@ A simple, animating side drawer built as a Web Component
 
 ## Installation
 
-You can integrate side-drawer via `<script>` tag or via ES Modules.
+You can integrate side-drawer via `<script>` tag or via NPM.
 
 ### Via `<script>` tag
 
 In the `<head>` of your index.html put a script tag like this:
 
 ```html
-<script src="https://unpkg.com/side-drawer/dist/side-drawer.min.js"></script>
+<script
+  type="module"
+  src="https://unpkg.com/side-drawer/dist/esm/side-drawer.min.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/side-drawer/dist/iife/side-drawer.min.js"
+></script>
 ```
 
 Now you can use the `side-drawer` element anywhere in your html, JSX, template, etc.
 
-### Via ES Modules
+### Via NPM
 
 ```bash
 npm install side-drawer --save
 ```
 
-You can see an example of a React app consuming a web component [here](https://github.com/wes566/wc-menu-button#react-example).
+And then you need to import the module before you can use it in your html/jsx/template:
+
+```js
+import "side-drawer";
+```
+
+## Web Component Browser Support
+
+This web component uses [HTML templates](https://caniuse.com/#feat=template), the [shadow DOM](https://caniuse.com/#feat=shadowdomv1), and [custom elements](https://caniuse.com/#feat=custom-elementsv1). If you need to polyfill for any of these standards then [take a look at the web components polyfill](https://github.com/webcomponents/webcomponentsjs).
 
 ## API and Customization
 
