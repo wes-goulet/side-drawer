@@ -1,4 +1,6 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/infinite-carousel-wc.svg)](https://npmjs.org/package/infinite-carousel-wc)
+
+[![CircleCI](https://circleci.com/gh/wes566/side-drawer.svg?style=svg)](https://circleci.com/gh/wes566/side-drawer)
 
 # side-drawer
 
