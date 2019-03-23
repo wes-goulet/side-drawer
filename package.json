@@ -25,7 +25,7 @@
     "copy-watch-iife": "onchange -v \"dist/iife/side-drawer.js\" -- cp ./dist/iife/side-drawer.js ./example/side-drawer.iife.js",
     "start": "npm-run-all --parallel rollup-watch serve copy-watch-esm copy-watch-iife",
     "clean": "rm -rf dist",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "gzip-check": "npx gzip-size-cli dist/esm/side-drawer.min.js"
   },
   "devDependencies": {
