@@ -71,7 +71,7 @@ const iife = {
   output: {
     file: "dist/iife/side-drawer.js",
     format: "iife",
-    name: "InfiniteCarouselWc"
+    name: "SideDrawer"
   }
 };
 
@@ -98,7 +98,7 @@ const iifeMin = {
   output: {
     file: "dist/iife/side-drawer.min.js",
     format: "iife",
-    name: "InfiniteCarouselWc"
+    name: "SideDrawer"
   }
 };
 

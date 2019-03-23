@@ -1,4 +1,4 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/infinite-carousel-wc.svg)](https://npmjs.org/package/infinite-carousel-wc)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
 
 [![CircleCI](https://circleci.com/gh/wes566/side-drawer.svg?style=svg)](https://circleci.com/gh/wes566/side-drawer)
 
