@@ -134,3 +134,14 @@ export class SideDrawer extends HTMLElement {
 }
 
 customElements.define("side-drawer", SideDrawer);
+
+// JSX Type Declaration - using 'any' for now just so things will
+// compile. Need to decide if we want to bring in a dep on (p)react
+// so that we can properly extend HTMLAttributes JSX interface.
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "side-drawer": any;
+    }
+  }
+}
