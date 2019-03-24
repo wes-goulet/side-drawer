@@ -1,6 +1,6 @@
 {
   "name": "side-drawer",
-  "version": "2.0.2",
+  "version": "2.1.1",
   "description": "A simple side drawer element with no dependencies and small as possible",
   "keywords": [
     "web component",
