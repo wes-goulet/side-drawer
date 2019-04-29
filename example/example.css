@@ -7,6 +7,7 @@
   --secondary-accent-color: #7c64d8;
   --code-bg-color: #64189f22;
   --code-fg-color: #2c2c2c;
+  --wc-menu-button-color: var(--primary-accent-color);
   /* --side-drawer-overlay-opacity: 0; */
 }
 
@@ -38,24 +39,8 @@ html body {
   color: var(--primary-fg-color);
 }
 
-.accent-icon {
-  --wc-menu-button-color: var(--primary-accent-color);
-}
-
-.big-icon {
-  --wc-menu-button-width: 60px;
-}
-
-.demo-color {
-  --wc-menu-button-color: orange;
-}
-
-.demo-size {
-  --wc-menu-button-width: 67px;
-}
-
-.demo-hover-opacity {
-  --wc-menu-button-hover-opacity: 1;
+wc-menu-button {
+  width: 60px;
 }
 
 body {

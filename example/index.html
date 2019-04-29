@@ -13,7 +13,7 @@
     <!-- I copy the .js file into the example folder so netlify can just publish the example folder -->
     <script type="module" src="./side-drawer.esm.js"></script>
     <script nomodule src="./side-drawer.iife.js"></script>
-    <script src="https://unpkg.com/wc-menu-button/dist/wc-menu-button.js"></script>
+    <script src="https://unpkg.com/wc-menu-button/dist/esm/wc-menu-button.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./example.css" />
 
@@ -26,10 +26,7 @@
         <h1>side-drawer</h1>
         <h2>A simple, animating side drawer built as a Web Component</h2>
         <div class="hero-demo">
-          <wc-menu-button
-            id="menuButton"
-            class="big-icon accent-icon"
-          ></wc-menu-button>
+          <wc-menu-button id="menuButton"></wc-menu-button>
         </div>
       </section>
 

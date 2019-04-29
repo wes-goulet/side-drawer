@@ -54,11 +54,9 @@ This web component uses [HTML templates](https://caniuse.com/#feat=template), th
 - `open`
   - Add this attribute to open the drawer.
     - Example: `<side-drawer open></side-drawer>`
-  - In (p)react you might need to set undefined in your JSX when you want the drawer closed.
-    - Example: `<side-drawer open={this.state.isDrawerOpen || undefined}></side-drawer>`
   - Set the property in Javascript to imperatively toggle the drawer
     - Example: `drawer.open = true`
-  - In (p)react you might need to set undefined in your JSX
+  - In (p)react you might need to set undefined in your JSX (since false !== undefined for html attribute existence)
     - Example: `<side-drawer open={this.state.isDrawerOpen || undefined}></side-drawer>`
 
 ### Events
