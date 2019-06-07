@@ -20,6 +20,8 @@ side-drawer {
 
 .drawer-sample-container {
   height: 100%;
+  display: flex;
+  justify-content: space-between;
   padding: 21px;
   font-size: 21px;
   display: flex;
