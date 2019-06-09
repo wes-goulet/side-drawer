@@ -21,6 +21,7 @@
   background-color: inherit;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
+  overscroll-behavior: contain;
 
   top: 0;
   bottom: 0;
@@ -47,18 +48,32 @@
 
   top: 0;
   bottom: 0;
-  right: 0;
+  right: -30px; /* hide scrollbar until overscroll bug is fixed */
   height: 100vh;
   transition: var(
     --side-drawer-overlay-transition,
     opacity 0.25s ease-in-out 0.25s
   );
-  width: 100vw;
+  width: calc(
+    100vw + 30px
+  ); /* put back to just 100vw once overscroll bug fixed */
   opacity: 0;
   visibility: hidden;
+
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 :host([open]) #fs {
   opacity: var(--side-drawer-overlay-opacity, 0.7);
   visibility: visible;
+}
+
+/*
+ * Workaround for bug https://bugs.chromium.org/p/chromium/issues/detail?id=813094
+ * Once bug is fixed and in the wild we can remove this element and make #if overflow:hidden
+ * and set "right: 0; width: 100vw" for #fs
+ */
+#ifs {
+  height: calc(100vh + 1px);
 }
