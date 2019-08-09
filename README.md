@@ -87,6 +87,12 @@ side-drawer {
 }
 ```
 
+You can set a backdrop filter using the following CSS variable.
+
+- `--side-drawer-backdrop-filter`
+  - Sets the backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open).
+  - Default is `none`
+
 You can customize the overlay that appears to the right of the drawer (when it's open) by setting one of the following CSS variables.
 
 - `--side-drawer-overlay-transition`

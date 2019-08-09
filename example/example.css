@@ -8,6 +8,7 @@
   --code-bg-color: #64189f22;
   --code-fg-color: #2c2c2c;
   --wc-menu-button-color: var(--primary-accent-color);
+  /* --side-drawer-backdrop-filter: blur(10px); */
   /* --side-drawer-overlay-opacity: 0; */
 }
 
