@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "side-drawer.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A simple side drawer custom element",
+          "name": "SideDrawer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open"
+            }
+          ],
+          "events": [
+            {
+              "name": "close",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "side-drawer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SideDrawer",
+          "declaration": {
+            "name": "SideDrawer",
+            "module": "side-drawer.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "side-drawer",
+          "declaration": {
+            "name": "SideDrawer",
+            "module": "side-drawer.js"
+          }
+        }
+      ]
+    }
+  ]
+}

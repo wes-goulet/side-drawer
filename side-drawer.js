@@ -239,4 +239,4 @@ export class SideDrawer extends HTMLElement {
   };
 }
 
-customElements.define("wc-menu-button", SideDrawer);
+customElements.define("side-drawer", SideDrawer);
