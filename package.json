@@ -58,7 +58,7 @@
   "bundlesize": [
     {
       "path": "./side-drawer.min.js",
-      "maxSize": "1.2 KB"
+      "maxSize": "1.4 KB"
     }
   ],
   "engines": {
