@@ -1,7 +1,93 @@
-// @ts-ignore
-import style from "./style.css";
-// @ts-ignore
-import template from "./template.html";
+// @ts-check
+
+const style = `
+:host {
+  background-color: #ffffff;
+  width: 350px;
+  max-width: 75vw;
+
+  visibility: hidden;
+  transition: visibility 0.5s;
+}
+
+:host([open]) {
+  visibility: visible;
+}
+
+::slotted(div) {
+  box-sizing: border-box;
+}
+
+#d {
+  position: fixed;
+  z-index: 99;
+  background-color: inherit;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  overscroll-behavior: contain;
+  backdrop-filter: var(--side-drawer-backdrop-filter, none);
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: inherit;
+  max-width: inherit;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+:host([open]) #d {
+  transform: none;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
+}
+
+#fs {
+  position: fixed;
+  z-index: 98;
+  background-color: #000000;
+  backdrop-filter: var(--side-drawer-backdrop-filter, none);
+
+  top: 0;
+  bottom: 0;
+  right: -30px; /* hide scrollbar until overscroll bug is fixed */
+  height: 100vh;
+  transition: var(
+    --side-drawer-overlay-transition,
+    opacity 0.25s ease-in-out 0.25s
+  );
+  width: calc(
+    100vw + 30px
+  ); /* put back to just 100vw once overscroll bug fixed */
+  opacity: 0;
+  visibility: hidden;
+
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+:host([open]) #fs {
+  opacity: var(--side-drawer-overlay-opacity, 0.7);
+  visibility: visible;
+}
+
+/*
+   * Workaround for bug https://bugs.chromium.org/p/chromium/issues/detail?id=813094
+   * Once bug is fixed and in the wild we can remove this element and make #if overflow:hidden
+   * and set "right: 0; width: 100vw" for #fs
+   */
+#ifs {
+  height: calc(100vh + 1px);
+}
+`;
+
+const template = `
+<div id="d"><slot></slot></div>
+<div id="fs"><div id="ifs"></div></div>
+`;
 
 // using a template so it only needs to be parsed once, whereas setting
 // innerHTML directly in the custom element ctor means the HTML would get parsed
@@ -9,21 +95,20 @@ import template from "./template.html";
 const tmpl = document.createElement("template");
 tmpl.innerHTML = `<style>${style}</style>${template}`;
 
-enum KEYCODE {
-  ESC = 27
-}
-
+/**
+ * A simple side drawer custom element
+ */
 export class SideDrawer extends HTMLElement {
-  private _freeSpaceDiv: HTMLElement | null;
-
-  // Explicitly let TS know any type can come from index signature
-  [key: string]: any;
-
   constructor() {
     super();
 
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
+    /**
+     * @internal
+     * @type {HTMLElement | null}
+     */
     this._freeSpaceDiv = shadowRoot.getElementById("fs");
   }
 
@@ -43,21 +128,31 @@ export class SideDrawer extends HTMLElement {
   }
 
   // from https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
-  upgradeProperty = (prop: string) => {
+  /**
+   * @param {string} prop
+   *
+   * @internal
+   */
+  upgradeProperty(prop) {
     if (this.hasOwnProperty(prop)) {
       let value = this[prop];
       delete this[prop];
       this[prop] = value;
     }
-  };
+  }
 
-  handleKeyUp = (e: KeyboardEvent) => {
+  /**
+   * @param {KeyboardEvent} e
+   *
+   * @internal
+   */
+  handleKeyUp = (e) => {
     if (e.altKey) {
       return;
     }
 
-    switch (e.keyCode) {
-      case KEYCODE.ESC:
+    switch (e.key) {
+      case "Escape":
         e.preventDefault();
         this.open = false;
         break;
@@ -84,10 +179,14 @@ export class SideDrawer extends HTMLElement {
     return ["open"];
   }
 
-  // private _bodyOverflow: string | null | undefined;
-  // private _bodyPosition: string | null | undefined;
-  attributeChangedCallback(_name: string, _oldValue: any, _newValue: any) {
-    if (_name === "open") {
+  /**
+   * @param {string} name
+   * @param {unknown} _oldValue
+   * @param {unknown} _newValue
+   * @memberof WcMenuButton
+   */
+  attributeChangedCallback(name, _oldValue, _newValue) {
+    if (name === "open") {
       // When the drawer is closed, update keyboard/screen reader behavior.
       if (!this.open) {
         this.setAttribute("tabindex", "-1");
@@ -103,7 +202,7 @@ export class SideDrawer extends HTMLElement {
 
         this.dispatchEvent(
           new CustomEvent("close", {
-            bubbles: true
+            bubbles: true,
           })
         );
       } else {
@@ -111,7 +210,7 @@ export class SideDrawer extends HTMLElement {
         this.setAttribute("aria-disabled", "false");
 
         this.focus({
-          preventScroll: true
+          preventScroll: true,
         });
 
         document.addEventListener("keyup", this.handleKeyUp);
@@ -125,27 +224,19 @@ export class SideDrawer extends HTMLElement {
 
         this.dispatchEvent(
           new CustomEvent("open", {
-            bubbles: true
+            bubbles: true,
           })
         );
       }
     }
   }
 
-  private handleFreeSpaceDivClick = (_e: any) => {
+  /**
+   * @internal
+   */
+  handleFreeSpaceDivClick = () => {
     this.open = false;
   };
 }
 
-customElements.define("side-drawer", SideDrawer);
-
-// JSX Type Declaration - using 'any' for now just so things will
-// compile. Need to decide if we want to bring in a dep on (p)react
-// so that we can properly extend HTMLAttributes JSX interface.
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "side-drawer": any;
-    }
-  }
-}
+customElements.define("wc-menu-button", SideDrawer);

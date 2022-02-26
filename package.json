@@ -1,6 +1,6 @@
 {
   "name": "side-drawer",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "A simple side drawer element with no dependencies and small as possible",
   "keywords": [
     "web component",
@@ -13,41 +13,59 @@
     "web-component",
     "custom-element"
   ],
-  "module": "dist/esm/side-drawer.js",
-  "main": "dist/esm/side-drawer.js",
-  "source": "lib/side-drawer.ts",
-  "types": "dist/esm/side-drawer.d.ts",
-  "scripts": {
-    "build": "rollup -c && cp ./dist/esm/side-drawer.js ./example/side-drawer.esm.js && cp ./dist/iife/side-drawer.js ./example/side-drawer.iife.js",
-    "rollup-watch": "rollup -c --watch",
-    "serve": "live-server ./example",
-    "copy-watch-esm": "onchange -v \"dist/esm/side-drawer.js\" -- cp ./dist/esm/side-drawer.js ./example/side-drawer.esm.js",
-    "copy-watch-iife": "onchange -v \"dist/iife/side-drawer.js\" -- cp ./dist/iife/side-drawer.js ./example/side-drawer.iife.js",
-    "start": "npm-run-all --parallel rollup-watch serve copy-watch-esm copy-watch-iife",
-    "clean": "rm -rf dist",
-    "prepare": "npm run build",
-    "gzip-check": "npx gzip-size-cli dist/esm/side-drawer.min.js"
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.4.5",
-    "live-server": "^1.2.1",
-    "npm-run-all": "^4.1.5",
-    "onchange": "^5.2.0",
-    "rollup": "^1.1.0",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-string": "^2.0.2",
-    "rollup-plugin-terser": "^4.0.2",
-    "rollup-plugin-typescript2": "^0.21.1",
-    "typescript": "^3.2.2"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/wes566/side-drawer"
   },
-  "author": "Wes Peter",
+  "author": "wes@goulet.dev",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wes566/side-drawer"
   },
-  "homepage": "https://github.com/wes566/side-drawer"
+  "homepage": "https://github.com/wes566/side-drawer",
+  "module": "side-drawer.js",
+  "main": "side-drawer.js",
+  "source": "side-drawer.js",
+  "types": "side-drawer.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc && npm run minify && npm run manifest",
+    "minify": "terser side-drawer.js -o side-drawer.min.js -c -m",
+    "manifest": "custom-elements-manifest analyze --globs 'side-drawer.js'",
+    "lint": "npm run lint:formatting && npm run lint:size",
+    "lint:formatting": "prettier --check .",
+    "lint:size": "bundlesize",
+    "fix:formatting": "prettier --write ."
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "bundlesize": "^0.18.0",
+    "prettier": "^2.5.1",
+    "terser": "^5.11.0",
+    "typescript": "^4.5.5"
+  },
+  "files": [
+    "side-drawer.js",
+    "side-drawer.min.js",
+    "side-drawer.d.ts"
+  ],
+  "exports": {
+    ".": {
+      "import": "./side-drawer.js",
+      "default": "./side-drawer.js"
+    }
+  },
+  "bundlesize": [
+    {
+      "path": "./side-drawer.min.js",
+      "maxSize": "1.2 KB"
+    }
+  ],
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "volta": {
+    "node": "16.14.0"
+  },
+  "customElements": "custom-elements.json"
 }

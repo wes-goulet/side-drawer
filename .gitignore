@@ -1,9 +1,5 @@
-dist/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-.rpt2_cache/
-example/side-drawer.*.js
+*.min.js
+*.d.ts
 
 # Created by https://www.gitignore.io/api/node,macos,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,macos,windows,visualstudiocode

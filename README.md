@@ -1,6 +1,4 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
-
-[![CircleCI](https://circleci.com/gh/wes566/side-drawer.svg?style=svg)](https://circleci.com/gh/wes566/side-drawer)
+![Build](https://github.com/wes566/side-drawer/workflows/Build/badge.svg) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
 
 # side-drawer
 
@@ -21,11 +19,13 @@ In the `<head>` of your index.html put a script tag like this:
 ```html
 <script
   type="module"
-  src="https://unpkg.com/side-drawer/dist/esm/side-drawer.min.js"
+  src="https://unpkg.com/side-drawer/side-drawer.js"
 ></script>
+
+<!-- Or use the minified version -->
 <script
-  nomodule
-  src="https://unpkg.com/side-drawer/dist/iife/side-drawer.min.js"
+  type="module"
+  src="https://unpkg.com/side-drawer/side-drawer.min.js"
 ></script>
 ```
 
@@ -106,9 +106,10 @@ You can customize the overlay that appears to the right of the drawer (when it's
 
 This project is built with standard HTML/CSS/TS, no frameworks or special web-component compilers here (for maximum simplicity and minimum size). If you want to learn more about writing custom elements see [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) or [this web fundamentals page](https://developers.google.com/web/fundamentals/web-components/).
 
+The source for this web component is contained in [side-drawer.js](side-drawer.js) and example usage is in [index.html](index.html). To debug/run the example you can just open index.html in a browser. For a hot-reload developer experience try [using live server in vscode](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+
+You will need the dev dependencies of this project installed to run the post-commit hooks.
+
 ```bash
 npm install
-npm start
 ```
-
-This will start a live-server on port localhost:8080. Any changes you make to files in lib/ or any changes to example/index.html should get live reloaded.
