@@ -33,7 +33,10 @@ const style = `
   height: 100%;
   box-sizing: border-box;
   transform: translateX(-100%);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(
+    --side-drawer-transition,
+    transform 0.25s ease-out
+  );
   width: inherit;
   max-width: inherit;
   border-top-right-radius: inherit;
@@ -57,7 +60,7 @@ const style = `
   height: 100vh;
   transition: var(
     --side-drawer-overlay-transition,
-    opacity 0.25s ease-in-out 0.25s
+    opacity linear 0.25s
   );
   width: calc(
     100vw + 30px
