@@ -87,20 +87,14 @@ side-drawer {
 }
 ```
 
-You can set a backdrop filter using the following CSS variable.
+You can customize styling with the following CSS variables:
 
-- `--side-drawer-backdrop-filter`
-  - Sets the backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open).
-  - Default is `none`
-
-You can customize the overlay that appears to the right of the drawer (when it's open) by setting one of the following CSS variables.
-
-- `--side-drawer-overlay-transition`
-  - Sets the transition
-  - Default is `opacity 0.25s ease-in-out 0.25s`
-- `--side-drawer-overlay-opacity`
-  - Sets the opacity of the overlay
-  - Default is `0.7`
+| Variable | Default | Description |
+| -------- | ----------- | ------- |
+| `--side-drawer-transition` | `transform 0.25s ease-out` | The open/close transition for the drawer |
+| `--side-drawer-backdrop-filter` | `none` | The backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open) |
+| `--side-drawer-overlay-transition`| `opacity linear 0.25s` | The transition for the overlay that appears to the right of the drawer (when it's open) |
+| `--side-drawer-overlay-opacity` | `0.7` | The opacity of the overlay |
 
 ## Contribute
 
