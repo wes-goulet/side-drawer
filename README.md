@@ -89,12 +89,12 @@ side-drawer {
 
 You can customize styling with the following CSS variables:
 
-| Variable | Default | Description |
-| -------- | ----------- | ------- |
-| `--side-drawer-transition` | `transform 0.25s ease-out` | The open/close transition for the drawer |
-| `--side-drawer-backdrop-filter` | `none` | The backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open) |
-| `--side-drawer-overlay-transition`| `opacity linear 0.25s` | The transition for the overlay that appears to the right of the drawer (when it's open) |
-| `--side-drawer-overlay-opacity` | `0.7` | The opacity of the overlay |
+| Variable                           | Default                    | Description                                                                                                      |
+| ---------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `--side-drawer-transition`         | `transform 0.25s ease-out` | The open/close transition for the drawer                                                                         |
+| `--side-drawer-backdrop-filter`    | `none`                     | The backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open) |
+| `--side-drawer-overlay-transition` | `opacity linear 0.25s`     | The transition for the overlay that appears to the right of the drawer (when it's open)                          |
+| `--side-drawer-overlay-opacity`    | `0.7`                      | The opacity of the overlay                                                                                       |
 
 ## Contribute
 
