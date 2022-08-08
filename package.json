@@ -38,7 +38,7 @@
     "fix:formatting": "prettier --write ."
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@custom-elements-manifest/analyzer": "^0.6.4",
     "bundlesize": "^0.18.0",
     "prettier": "^2.5.1",
     "terser": "^5.11.0",
