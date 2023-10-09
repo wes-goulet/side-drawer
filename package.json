@@ -15,14 +15,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wes566/side-drawer"
+    "url": "https://github.com/wes-goulet/side-drawer"
   },
   "author": "wes@goulet.dev",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wes566/side-drawer"
-  },
-  "homepage": "https://github.com/wes566/side-drawer",
+  "homepage": "https://github.com/wes-goulet/side-drawer",
   "module": "side-drawer.js",
   "main": "side-drawer.js",
   "source": "side-drawer.js",
@@ -38,11 +35,11 @@
     "fix:formatting": "prettier --write ."
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.5.7",
-    "bundlesize": "^0.18.0",
-    "prettier": "^2.5.1",
-    "terser": "^5.11.0",
-    "typescript": "^4.5.5"
+    "@custom-elements-manifest/analyzer": "^0.8.4",
+    "bundlesize": "^0.18.1",
+    "prettier": "^3.0.3",
+    "terser": "^5.21.0",
+    "typescript": "^5.2.2"
   },
   "files": [
     "side-drawer.js",
@@ -62,10 +59,10 @@
     }
   ],
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=18.18.0"
   },
   "volta": {
-    "node": "16.14.0"
+    "node": "18.18.0"
   },
   "customElements": "custom-elements.json"
 }

@@ -1,4 +1,4 @@
-![Build](https://github.com/wes566/side-drawer/workflows/Build/badge.svg) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
+![Build](https://github.com/wes-goulet/side-drawer/workflows/Build/badge.svg) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/side-drawer) [![npm](https://img.shields.io/npm/v/side-drawer.svg)](https://npmjs.org/package/side-drawer)
 
 # side-drawer
 
@@ -98,7 +98,7 @@ You can customize styling with the following CSS variables:
 
 ## Contribute
 
-This project is built with standard HTML/CSS/TS, no frameworks or special web-component compilers here (for maximum simplicity and minimum size). If you want to learn more about writing custom elements see [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) or [this web fundamentals page](https://developers.google.com/web/fundamentals/web-components/).
+This project is built with standard HTML/CSS/JS, no frameworks or special web-component compilers here (for maximum simplicity and minimum size). If you want to learn more about writing custom elements see [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) or [this web.dev page](https://web.dev/web-components/).
 
 The source for this web component is contained in [side-drawer.js](side-drawer.js) and example usage is in [index.html](index.html). To debug/run the example you can just open index.html in a browser. For a hot-reload developer experience try [using live server in vscode](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
