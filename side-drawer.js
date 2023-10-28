@@ -5,92 +5,72 @@ const style = `
   background-color: #ffffff;
   width: 350px;
   max-width: 75vw;
-
-  visibility: hidden;
-  transition: visibility 0.5s;
+  z-index: 10;
 }
 
-:host([open]) {
-  visibility: visible;
-}
-
-::slotted(div) {
+::slotted(*) {
   box-sizing: border-box;
 }
 
-#d {
-  position: fixed;
-  z-index: 99;
-  background-color: inherit;
-  -webkit-overflow-scrolling: touch;
-  overflow: auto;
-  overscroll-behavior: contain;
-  backdrop-filter: var(--side-drawer-backdrop-filter, none);
+dialog {
+  all: unset;
 
+  width: inherit;
+  max-width: inherit;
+
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   height: 100%;
-  box-sizing: border-box;
+
   transform: translateX(-100%);
   transition: var(
     --side-drawer-transition,
     transform 0.25s ease-out
   );
-  width: inherit;
-  max-width: inherit;
+}
+
+/* putting this here in case this is ever fixed:
+ https://github.com/whatwg/html/issues/7732 */
+dialog,
+dialog::backdrop {
+  overscroll-behavior: contain;
+}
+
+dialog:modal {
+  background-color: inherit;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
 }
 
-:host([open]) #d {
-  transform: none;
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
-}
-
-#fs {
-  position: fixed;
-  z-index: 98;
-  background-color: #000000;
+dialog::backdrop {
+  background-color: #000;
   backdrop-filter: var(--side-drawer-backdrop-filter, none);
 
-  top: 0;
-  bottom: 0;
-  right: -30px; /* hide scrollbar until overscroll bug is fixed */
-  height: 100vh;
+  opacity: 0;
   transition: var(
     --side-drawer-overlay-transition,
     opacity linear 0.25s
   );
-  width: calc(
-    100vw + 30px
-  ); /* put back to just 100vw once overscroll bug fixed */
-  opacity: 0;
-  visibility: hidden;
-
-  overflow: auto;
-  overscroll-behavior: contain;
 }
 
-:host([open]) #fs {
-  opacity: var(--side-drawer-overlay-opacity, 0.7);
-  visibility: visible;
+:host([open]) dialog[open],
+:host([open]) dialog[open]::backdrop {
+    transition-delay:0s;
+    transform: none;
 }
 
-/*
-   * Workaround for bug https://bugs.chromium.org/p/chromium/issues/detail?id=813094
-   * Once bug is fixed and in the wild we can remove this element and make #if overflow:hidden
-   * and set "right: 0; width: 100vw" for #fs
-   */
-#ifs {
-  height: calc(100vh + 1px);
+:host([open]) dialog[open]::backdrop {
+    transition-delay: 0s;
+    opacity: var(--side-drawer-overlay-opacity, .7);
 }
 `;
+// NOTE: for some reason "transitionend" is never called if my CSS selector is
+// just "dialog[open]", which is why the selector has ":host([open])" at the beginning
 
-const template = `
-<div id="d"><slot></slot></div>
-<div id="fs"><div id="ifs"></div></div>
-`;
+const template = `<dialog part="dialog"><slot></slot></dialog>`;
 
 // using a template so it only needs to be parsed once, whereas setting
 // innerHTML directly in the custom element ctor means the HTML would get parsed
@@ -110,27 +90,30 @@ export class SideDrawer extends HTMLElement {
 
     /**
      * @internal
-     * @type {HTMLElement | null}
+     * @type {HTMLDialogElement | null}
      */
-    this._freeSpaceDiv = shadowRoot.getElementById("fs");
+    this._dialog = /** @type {HTMLDialogElement} */ (
+      shadowRoot.querySelector("dialog")
+    );
   }
 
   connectedCallback() {
-    if (this._freeSpaceDiv) {
-      this._freeSpaceDiv.addEventListener(
-        "click",
-        this.handleFreeSpaceDivClick
-      );
+    if (this._dialog) {
+      this._dialog.addEventListener("click", (event) => {
+        if (event.target === this._dialog) {
+          this.open = false;
+        }
+      });
+
+      this._dialog.addEventListener("close", () => {
+        this.open = false;
+      });
     }
 
     this.upgradeProperty("open");
   }
 
-  disconnectedCallback() {
-    document.removeEventListener("keyup", this.handleKeyUp);
-  }
-
-  // from https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
+  // from https://web.dev/custom-elements-best-practices/#make-properties-lazy
   /**
    * @param {string} prop
    *
@@ -143,24 +126,6 @@ export class SideDrawer extends HTMLElement {
       this[prop] = value;
     }
   }
-
-  /**
-   * @param {KeyboardEvent} e
-   *
-   * @internal
-   */
-  handleKeyUp = (e) => {
-    if (e.altKey) {
-      return;
-    }
-
-    switch (e.key) {
-      case "Escape":
-        e.preventDefault();
-        this.open = false;
-        break;
-    }
-  };
 
   get open() {
     return this.hasAttribute("open");
@@ -192,54 +157,30 @@ export class SideDrawer extends HTMLElement {
     if (name === "open") {
       // When the drawer is closed, update keyboard/screen reader behavior.
       if (!this.open) {
-        this.setAttribute("tabindex", "-1");
-        this.setAttribute("aria-disabled", "true");
-
-        document.removeEventListener("keyup", this.handleKeyUp);
-        // if (this._bodyOverflow !== undefined) {
-        //   document.body.style.overflow = this._bodyOverflow;
-        // }
-        // if (this._bodyPosition !== undefined) {
-        //   document.body.style.position = this._bodyPosition;
-        // }
+        this._dialog.addEventListener(
+          "transitionend",
+          () => {
+            this._dialog.close();
+          },
+          { once: true },
+        );
 
         this.dispatchEvent(
           new CustomEvent("close", {
             bubbles: true,
-          })
+          }),
         );
       } else {
-        this.setAttribute("tabindex", "0");
-        this.setAttribute("aria-disabled", "false");
-
-        this.focus({
-          preventScroll: true,
-        });
-
-        document.addEventListener("keyup", this.handleKeyUp);
-        // to prevent body behind drawer from scrolling you need
-        // to set overflow to hidden and position to fixed (for iOS)
-        // TODO: this is too buggy
-        // this._bodyOverflow = document.body.style.overflow;
-        // document.body.style.overflow = "hidden";
-        // this._bodyPosition = document.body.style.position;
-        // document.body.style.position = "fixed";
+        this._dialog.showModal();
 
         this.dispatchEvent(
           new CustomEvent("open", {
             bubbles: true,
-          })
+          }),
         );
       }
     }
   }
-
-  /**
-   * @internal
-   */
-  handleFreeSpaceDivClick = () => {
-    this.open = false;
-  };
 }
 
 customElements.define("side-drawer", SideDrawer);

@@ -8,6 +8,15 @@ A simple, animating side drawer built as a Web Component
 
 ## [Demo](https://side-drawer.netlify.com/)
 
+## Breaking Change in v4.x
+
+This custom element now uses a standard `dialog` under the hood. As of October 2023 there are some browser bugs around dialog `::backdrop` not seeing CSS variables. As a result the `--side-drawer-backdrop-filter`, `--side-drawer-overlay-opacity` and `--side-drawer-overlay-transition` variables will not work in some browsers. If you need to support these browsers you can use v3.x of this component until the browser bugs are fixed.
+
+[Web Page Test for ::backdrop respecting CSS vars](https://wpt.fyi/results/html/semantics/interactive-elements/the-dialog-element/backdrop-inherits.html)
+[Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=827397)
+[Firefox bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1855668)
+[Safari bug](https://bugs.webkit.org/show_bug.cgi?id=263834)
+
 ## Installation
 
 You can integrate side-drawer via `<script>` tag or via NPM.
@@ -79,9 +88,9 @@ You can style the side-drawer element as you would any regular element, in CSS. 
 ```css
 side-drawer {
   background-color: #ffffff;
-  color: inherit;
   width: 350px;
   max-width: 75vw;
+  z-index: 10;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -91,7 +100,7 @@ You can customize styling with the following CSS variables:
 
 | Variable                           | Default                    | Description                                                                                                      |
 | ---------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `--side-drawer-transition`         | `transform 0.25s ease-out` | The open/close transition for the drawer                                                                         |
+| `--side-drawer-transition`         | `transform 0.25s ease-out` | The open/close transition for the drawer (should be "transform")                                                 |
 | `--side-drawer-backdrop-filter`    | `none`                     | The backdrop-filter for both the drawer and the overlay that appears to the right of the drawer (when it's open) |
 | `--side-drawer-overlay-transition` | `opacity linear 0.25s`     | The transition for the overlay that appears to the right of the drawer (when it's open)                          |
 | `--side-drawer-overlay-opacity`    | `0.7`                      | The opacity of the overlay                                                                                       |

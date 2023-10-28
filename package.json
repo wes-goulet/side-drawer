@@ -25,17 +25,17 @@
   "source": "side-drawer.js",
   "types": "side-drawer.d.ts",
   "scripts": {
-    "prepare": "npm run build",
     "build": "tsc && npm run minify && npm run manifest",
     "minify": "terser side-drawer.js -o side-drawer.min.js -c -m",
     "manifest": "custom-elements-manifest analyze --globs 'side-drawer.js'",
-    "lint": "npm run lint:formatting && npm run lint:size",
-    "lint:formatting": "prettier --check .",
+    "lint": "npm run format:check && npm run lint:size",
+    "format:check": "prettier --check .",
     "lint:size": "bundlesize",
-    "fix:formatting": "prettier --write ."
+    "format:fix": "prettier --write ."
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.8.4",
+    "@netlify/plugin-sitemap": "^0.8.1",
     "bundlesize": "^0.18.1",
     "prettier": "^3.0.3",
     "terser": "^5.21.0",
@@ -55,7 +55,7 @@
   "bundlesize": [
     {
       "path": "./side-drawer.min.js",
-      "maxSize": "1.4 KB"
+      "maxSize": "1.2 KB"
     }
   ],
   "engines": {
