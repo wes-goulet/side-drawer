@@ -29,6 +29,7 @@ dialog {
     --side-drawer-transition,
     transform 0.25s ease-out
   );
+  visibility: hidden;
 }
 
 /* putting this here in case this is ever fixed:
@@ -54,6 +55,10 @@ dialog::backdrop {
     --side-drawer-overlay-transition,
     opacity linear 0.25s
   );
+}
+
+dialog[open] {
+  visibility: visible;
 }
 
 :host([open]) dialog[open],
