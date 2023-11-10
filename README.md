@@ -67,6 +67,9 @@ This web component uses [HTML templates](https://caniuse.com/#feat=template), th
     - Example: `drawer.open = true`
   - In (p)react you might need to set undefined in your JSX (since false !== undefined for html attribute existence)
     - Example: `<side-drawer open={this.state.isDrawerOpen || undefined}></side-drawer>`
+- `right`
+  - Add this attribute so the drawer opens from the right instead of the left.
+    - Example: `<side-drawer right></side-drawer>`
 
 ### Events
 
