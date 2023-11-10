@@ -175,13 +175,13 @@ export class SideDrawer extends HTMLElement {
           () => {
             this._dialog.close();
           },
-          { once: true }
+          { once: true },
         );
 
         this.dispatchEvent(
           new CustomEvent("close", {
             bubbles: true,
-          })
+          }),
         );
       } else {
         this._dialog.showModal();
@@ -189,7 +189,7 @@ export class SideDrawer extends HTMLElement {
         this.dispatchEvent(
           new CustomEvent("open", {
             bubbles: true,
-          })
+          }),
         );
       }
     }
