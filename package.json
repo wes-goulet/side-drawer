@@ -1,6 +1,6 @@
 {
   "name": "side-drawer",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "A simple side drawer element with no dependencies and small as possible",
   "keywords": [
     "web component",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wes-goulet/side-drawer"
+    "url": "git+https://github.com/wes-goulet/side-drawer.git"
   },
   "author": "wes@goulet.dev",
   "license": "MIT",
