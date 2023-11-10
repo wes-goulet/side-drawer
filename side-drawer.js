@@ -32,6 +32,12 @@ dialog {
   visibility: hidden;
 }
 
+:host([right]) dialog {
+  left: unset;
+  right: 0;
+  transform: translateX(100%);
+}
+
 /* putting this here in case this is ever fixed:
  https://github.com/whatwg/html/issues/7732 */
 dialog,
@@ -44,6 +50,8 @@ dialog:modal {
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
 }
 
 dialog::backdrop {
@@ -63,7 +71,7 @@ dialog[open] {
 
 :host([open]) dialog[open],
 :host([open]) dialog[open]::backdrop {
-    transition-delay:0s;
+    transition-delay: 0s;
     transform: none;
 }
 
@@ -167,13 +175,13 @@ export class SideDrawer extends HTMLElement {
           () => {
             this._dialog.close();
           },
-          { once: true },
+          { once: true }
         );
 
         this.dispatchEvent(
           new CustomEvent("close", {
             bubbles: true,
-          }),
+          })
         );
       } else {
         this._dialog.showModal();
@@ -181,7 +189,7 @@ export class SideDrawer extends HTMLElement {
         this.dispatchEvent(
           new CustomEvent("open", {
             bubbles: true,
-          }),
+          })
         );
       }
     }
