@@ -34,7 +34,7 @@
     "format:fix": "prettier --write ."
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.8.4",
+    "@custom-elements-manifest/analyzer": "^0.9.0",
     "@netlify/plugin-sitemap": "^0.8.1",
     "bundlesize": "^0.18.1",
     "prettier": "^3.0.3",
