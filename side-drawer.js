@@ -80,6 +80,17 @@ tmpl.innerHTML = `<style>${style}</style>${template}`;
 
 /**
  * A simple side drawer custom element
+ *
+ * @element side-drawer
+ *
+ * @fires open - Raised when the drawer is opened.
+ * @fires close - Raised when the drawer is closed.
+ *
+ * @attr {boolean} open - Add this attribute to open the drawer.
+ *
+ * @slot - The content to go inside the drawer (the default slot)
+ *
+ * @csspart dialog - The underlying <dialog> element.
  */
 export class SideDrawer extends HTMLElement {
   constructor() {
@@ -90,25 +101,21 @@ export class SideDrawer extends HTMLElement {
 
     /**
      * @internal
-     * @type {HTMLDialogElement | null}
+     * @type {HTMLDialogElement}
      */
-    this._dialog = /** @type {HTMLDialogElement} */ (
-      shadowRoot.querySelector("dialog")
-    );
+    this._dialog = shadowRoot.querySelector("dialog");
   }
 
   connectedCallback() {
-    if (this._dialog) {
-      this._dialog.addEventListener("click", (event) => {
-        if (event.target === this._dialog) {
-          this.open = false;
-        }
-      });
-
-      this._dialog.addEventListener("close", () => {
+    this._dialog.addEventListener("click", (event) => {
+      if (event.target === this._dialog) {
         this.open = false;
-      });
-    }
+      }
+    });
+
+    this._dialog.addEventListener("close", () => {
+      this.open = false;
+    });
 
     this.upgradeProperty("open");
   }
@@ -162,13 +169,13 @@ export class SideDrawer extends HTMLElement {
           () => {
             this._dialog.close();
           },
-          { once: true },
+          { once: true }
         );
 
         this.dispatchEvent(
           new CustomEvent("close", {
             bubbles: true,
-          }),
+          })
         );
       } else {
         this._dialog.showModal();
@@ -176,7 +183,7 @@ export class SideDrawer extends HTMLElement {
         this.dispatchEvent(
           new CustomEvent("open", {
             bubbles: true,
-          }),
+          })
         );
       }
     }

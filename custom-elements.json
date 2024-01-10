@@ -10,6 +10,18 @@
           "kind": "class",
           "description": "A simple side drawer custom element",
           "name": "SideDrawer",
+          "cssParts": [
+            {
+              "description": "The underlying <dialog> element.",
+              "name": "dialog"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content to go inside the drawer (the default slot)",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -21,18 +33,24 @@
               "name": "close",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "Raised when the drawer is closed."
             },
             {
               "name": "open",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "Raised when the drawer is opened."
             }
           ],
           "attributes": [
             {
-              "name": "open"
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Add this attribute to open the drawer."
             }
           ],
           "superclass": {
