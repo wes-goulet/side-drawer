@@ -312,6 +312,11 @@
             <code>--side-drawer-overlay-opacity: .25;</code>
             <side-drawer id="drawer4"></side-drawer>
           </li>
+          <li>
+            <wc-menu-button id="menuButton5"></wc-menu-button>
+            <code>&lt;side-drawer right&gt;&lt;side-drawer&gt;</code>
+            <side-drawer right id="drawer5"></side-drawer>
+          </li>
         </ul>
       </section>
     </main>
@@ -347,11 +352,13 @@
         const menuButton2 = document.querySelector("#menuButton2");
         const menuButton3 = document.querySelector("#menuButton3");
         const menuButton4 = document.querySelector("#menuButton4");
+        const menuButton5 = document.querySelector("#menuButton5");
 
         const drawer = document.querySelector("#drawer");
         const drawer2 = document.querySelector("#drawer2");
         const drawer3 = document.querySelector("#drawer3");
         const drawer4 = document.querySelector("#drawer4");
+        const drawer5 = document.querySelector("#drawer5");
 
         menuButton.addEventListener("opened", (ev) => {
           drawer.open = true;
@@ -364,6 +371,9 @@
         });
         menuButton4.addEventListener("opened", (ev) => {
           drawer4.open = true;
+        });
+        menuButton5.addEventListener("opened", (ev) => {
+          drawer5.open = true;
         });
 
         drawer.addEventListener("open", (ev) => {
@@ -378,6 +388,9 @@
         drawer4.addEventListener("open", (ev) => {
           menuButton4.open = true;
         });
+        drawer5.addEventListener("open", (ev) => {
+          menuButton5.open = true;
+        });
 
         drawer.addEventListener("close", (ev) => {
           menuButton.open = false;
@@ -390,6 +403,9 @@
         });
         drawer4.addEventListener("close", (ev) => {
           menuButton4.open = false;
+        });
+        drawer5.addEventListener("close", (ev) => {
+          menuButton5.open = false;
         });
       }
     </script>

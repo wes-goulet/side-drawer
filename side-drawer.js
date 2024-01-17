@@ -29,6 +29,13 @@ dialog {
     --side-drawer-transition,
     transform 0.25s ease-out
   );
+  visibility: hidden;
+}
+
+:host([right]) dialog {
+  left: unset;
+  right: 0;
+  transform: translateX(100%);
 }
 
 /* putting this here in case this is ever fixed:
@@ -43,6 +50,8 @@ dialog:modal {
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
 }
 
 dialog::backdrop {
@@ -56,9 +65,13 @@ dialog::backdrop {
   );
 }
 
+dialog[open] {
+  visibility: visible;
+}
+
 :host([open]) dialog[open],
 :host([open]) dialog[open]::backdrop {
-    transition-delay:0s;
+    transition-delay: 0s;
     transform: none;
 }
 
