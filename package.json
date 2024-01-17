@@ -44,7 +44,8 @@
   "files": [
     "side-drawer.js",
     "side-drawer.min.js",
-    "side-drawer.d.ts"
+    "side-drawer.d.ts",
+    "custom-elements.json"
   ],
   "exports": {
     ".": {

@@ -1,0 +1,4 @@
+{
+  "customElementScanner.mode": "manual",
+  "customElementScanner.paths": ["side-drawer://custom-elements.json"]
+}
